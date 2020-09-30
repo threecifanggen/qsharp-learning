@@ -1,4 +1,5 @@
 from typing import Callable, Union
+from random import random
 from functools import reduce
 
 import numpy as np
@@ -6,8 +7,8 @@ from . import const
 
 Qubit = np.ndarray
 
-def measure(bra: Qubit) -> Callable[[Qubit], np.float]:
-    """测量
+def measure_prob(bra: Qubit) -> Callable[[Qubit], np.float]:
+    """测量概率
 
     Args:
         bra (Qubit): 测量的方向
@@ -17,6 +18,27 @@ def measure(bra: Qubit) -> Callable[[Qubit], np.float]:
     """
     def helper(ket: Qubit):
         return ((bra @ ket) ** 2).sum()
+    return helper
+
+
+def measure(bra: Qubit) -> Callable[[Qubit], bool]:
+    """模拟测量结果
+
+    Args:
+        bra (Qubit): 测量方向
+
+    Returns:
+        Callable[[Qubit], bool]: 科里化的函数，带入ket后返回模拟结果
+    """
+    def helper(ket: Qubit):
+        prob = measure_prob(bra)(ket)
+        return random() <= prob
+    return helper
+
+
+def measure_n(n: int, bra: Qubit) -> Callable[[Qubit], int]:
+    def helper(ket: Qubit):
+        return sum(measure(bra)(ket) for i in range(n))
     return helper
 
 
