@@ -24,7 +24,7 @@ BRA_MINUS = KET_MINUS.T
 BRA_CLOCK = KET_CLOCK.T
 BRA_ANTICLOCK = KET_ANTICLOCK.T
 
-# Gate
+# One-Qubit Gate
 IDENTITY_GATE: Qubit = np.eye(2, 2)
 H = HADAMARD = 1 / np.sqrt(2.0) * np.array([[1, 1], [1, -1]])
 X = SIGMA_X = np.array([[0, 1], [1, 0]])
@@ -32,3 +32,7 @@ Y = SIGMA_Y = np.array([[0, -i_], [i_, 0]])
 Z = SIGMA_Z = np.array([[1, 0], [0, -1]])
 S: Qubit = np.array([[1, 0], [0, np.exp(i_ * np.pi / 2.0)]])
 T: Qubit = np.array([[1, 0], [0, np.exp(i_ * np.pi / 4.0)]])
+S_DRAGGER = S.conjugate().transpose()
+T_DRAGGER = T.conjugate().transpose()
+
+# Two-Qubits Gate
