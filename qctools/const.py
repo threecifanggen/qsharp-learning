@@ -32,8 +32,8 @@ Y = SIGMA_Y = np.array([[0, -i_], [i_, 0]])
 Z = SIGMA_Z = np.array([[1, 0], [0, -1]])
 S: Qubit = np.array([[1, 0], [0, np.exp(i_ * np.pi / 2.0)]])
 T: Qubit = np.array([[1, 0], [0, np.exp(i_ * np.pi / 4.0)]])
-S_DRAGGER = S.conjugate().transpose()
-T_DRAGGER = T.conjugate().transpose()
+S_DAGGER = S.conjugate().transpose()
+T_DAGGER = T.conjugate().transpose()
 
 # Two-Qubits Gate
 CNOT = np.array(
